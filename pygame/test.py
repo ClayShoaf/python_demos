@@ -133,6 +133,7 @@ class Monster(pygame.sprite.Sprite):
         self.rect.x -= self.speed
         self.image = self.a_list[self.a_index]
         self.rect = self.image.get_rect(midbottom = self.rect.midbottom)
+        if self.rect.right < 0: self.kill()
 
 def display_score():
     current_time = pygame.time.get_ticks()//1000 - start_time
@@ -162,7 +163,8 @@ def detect_collisions(enemies, player):
                 kills += enemy.points
                 display_score()
                 player.double_jump = True
-                enemies.remove(enemy)
+                #enemies.remove(enemy)
+                enemy.kill()
                 player.gravity = min(player.gravity,-enemy.bounce)
                 player.unsafe = False
         elif player.unsafe and player.rect.colliderect(enemy.rect):
