@@ -49,10 +49,10 @@ class Chart():
         df['DAY OF YEAR'] = df[self.x].dt.dayofyear
         df['YEAR'] = df[self.x].dt.year
 
-        poop = df[['YEAR', 'DAY OF YEAR', self.values]].pivot(index='DAY OF YEAR', columns='YEAR', values=self.values)
+        my_chart = df[['YEAR', 'DAY OF YEAR', self.values]].pivot(index='DAY OF YEAR', columns='YEAR', values=self.values)
         fig, ax = plt.subplots(figsize=(10,10))
         fig.tight_layout(rect=[0.02, 0.03, 1.05, .98])
-        test = sns.heatmap(poop, cmap='coolwarm')
+        test = sns.heatmap(my_chart, cmap='coolwarm')
         test.collections[0].colorbar.set_label("")
         ax.set_title(f" Weather Station: {df.NAME.iloc[0]}")
         img_buf = io.BytesIO()
